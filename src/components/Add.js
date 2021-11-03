@@ -18,7 +18,7 @@ export default class Add extends Component {
     }
     handlePriceChange(e) {
         this.setState({price : e.target.value})
-        console.log(this.state.price);
+        // console.log(this.state.price);
     }
 
     render() {
@@ -30,11 +30,17 @@ export default class Add extends Component {
                     className="form col-7 mb-5" 
                     placeholder="Add" 
                     onChange={this.handleNameChange}/>
-                    <span>{this.state.price}</span>
+                    <span className="fs-1">{this.state.price}</span>
                     <input type="range" 
                     className="form col-7" 
                     min="1" max="10"
                     onChange={this.handlePriceChange}/>
+
+                    <button type="button" 
+                    className="btn btn-outline-primary col-2"
+                    onClick={()=> this.props.addItem(this.state.name,this.state.price)}>
+                    add
+                </button>
                 </div>
             </div>
         )

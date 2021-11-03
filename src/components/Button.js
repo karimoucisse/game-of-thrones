@@ -6,7 +6,7 @@ export default class Button extends Component {
         return ( 
         
                 <button 
-                    className={`btn btn-outline-primary col-2 mx-4 ${isSelected && "bg-secondary text-white"}`}
+                    className={`btn btn-secondary col-2 mx-4 ${isSelected && "bg-primary text-white"}`}
                     onClick={()=> handleClick (label)}>
                     {label}
                 </button>
