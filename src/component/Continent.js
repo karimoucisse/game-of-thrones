@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 
-export default class Pay extends Component {
+export default class continent extends Component {
     render() {
+        const {name} = this.props
         return (
             <div>
-                <h1>Pay</h1>
+                <h1>{name}</h1>
             </div>
         )
     }
