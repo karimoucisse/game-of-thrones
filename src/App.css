@@ -6,8 +6,8 @@ h1 {
   font-size: 60px;
 }
 
-.border-red{
-  border : 3px solid red;
+.bg-red{
+  color : red !important;
 }
 
 .buttons {
@@ -69,6 +69,13 @@ h1 {
 .character:hover i {
   color: rgb(107, 107, 107);
 }
-.character i:hover {
+/* .character i:hover {
   color: red;
+} */
+.continent_container {
+  flex-direction: column;
+  margin-top: 50px;
+}
+.continent_container h1 {
+  font-size: 60px;
 }

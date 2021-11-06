@@ -47,18 +47,25 @@ export default class App extends Component {
       });
 }
 
-  handleFavoriteClick(index) {
-    const newCharacter = this.state.characters
-    this.setState({favorites : [newCharacter[index], ...this.state.favorites]})
-    // this.setState({borderRed:index})
+  handleFavoriteClick(character,characterId) {
+    // let isFavorites = 
+    if(!this.state.favorites.includes(character)){
+      const newCharacter = this.state.characters
+      this.setState({favorites : [newCharacter[characterId], ...this.state.favorites]})
+    }else{
+      this.deleteFavorisCharacter(characterId)      
+    }
+    
   }
   handleButtonClick(string) {
     this.setState({buttonState : string})
   }
-  deleteFavorisCharacter(index) {
-    const duplication = this.state.favorites
-    duplication.splice(index,1)
-    this.setState({favorites : duplication})
+  deleteFavorisCharacter(characterId) {
+    // let isFavorites = this.state.favorites.includes(characterId)
+    let duplication = this.state.favorites.filter(character => character.id !== characterId)
+            // duplication.splice(characterId,1)
+      this.setState({favorites : duplication})
+    
     // console.log(index);
   }
 
@@ -78,15 +85,19 @@ export default class App extends Component {
         </div>
         {this.state.buttonState === "Characters" &&
           <div className="characters_container">
-            {this.state.characters.map((character,index) =>
-              <Character 
-                key = {index}
-                name={character.fullName} 
-                title={character.title} 
-                image={character.imageUrl}
-                favoriteClick={()=> this.handleFavoriteClick(index)}
-                // classBorder= {this.state.borderRed === index ? "border-red" : "border-none"}
-              />)
+            {this.state.characters.map((character,index) => {
+                let isFavorites = this.state.favorites.includes(character)
+                // console.log(`isFavorites ${index} : ${isFavorites}`);
+                return <Character 
+                  key = {index}
+                  name={character.fullName} 
+                  title={character.title} 
+                  image={character.imageUrl}
+                  favoriteClick={()=> this.handleFavoriteClick(character,character.id)}
+                  classBorder= {isFavorites && "bg-red" }
+                  // onClickDelete={this.deleteFavorisCharacter(character.id)}
+                /> 
+              })
             }
           </div>
         }
@@ -99,7 +110,7 @@ export default class App extends Component {
                 name={character.fullName} 
                 title={character.title} 
                 image={character.imageUrl}
-                onclickDelete={() => this.deleteFavorisCharacter(index)}
+                onclickDelete={() => this.deleteFavorisCharacter(character.id)}
               />)
             }
           </div>)
@@ -107,12 +118,15 @@ export default class App extends Component {
 
         {this.state.buttonState === "continents" &&
           <div className="characters_container">
-            {this.state.continents.map((continent,index) => 
-              <Continent 
-                key={index} 
-                name={continent.name} 
-              />)
-            }
+            <div className="continent_container">
+              {this.state.continents.map((continent,index) => 
+                <Continent 
+                  key={index} 
+                  name={continent.name} 
+                />
+                )
+              }
+            </div>
           </div>
         }
         
